@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manuale grafica SAE</title>
+<meta name="description" content="Guida passo per passo per preparare post, brochure e reel del SAE su Canva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: una colonna di lettura stretta; testata blu SAE, sotto una pila di tendine (details) */
+:root {
+  --bg: #f6f6fb;
+  --surface: #ffffff;
+  --ink: #16163a;
+  --muted: #5b5b7a;
+  --line: #dddde9;
+  --brand: #1f12a6;        /* blu SAE */
+  --brand-ink: #ffffff;
+  --sun: #ffde59;          /* giallo SAE */
+  --sun-soft: #fff6cc;
+  --code-bg: #eeeef6;
+  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f1f; --surface: #181830; --ink: #ececf7; --muted: #a4a4c4; --line: #2c2c4a;
+    --brand: #8d84ff; --brand-ink: #0f0f1f; --sun: #ffde59; --sun-soft: #3a3418; --code-bg: #22223d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f0f1f; --surface: #181830; --ink: #ececf7; --muted: #a4a4c4; --line: #2c2c4a;
+  --brand: #8d84ff; --brand-ink: #0f0f1f; --sun: #ffde59; --sun-soft: #3a3418; --code-bg: #22223d;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  margin: 0;
+}
+.wrap {
+  max-width: 820px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Testata */
+.masthead { background: var(--brand); color: var(--brand-ink); }
+.masthead .wrap { padding-block: 40px 32px; display: grid; gap: 10px; }
+.masthead .eyebrow {
+  font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sun);
+}
+:root[data-theme="dark"] .masthead .eyebrow { color: var(--brand-ink); }
+.masthead h1 {
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(32px, 6vw, 46px);
+  line-height: 1.1; margin: 0; text-wrap: balance;
+}
+.masthead p { margin: 0; max-width: 60ch; opacity: .92; }
+
+main .wrap { padding-block: 28px 64px; display: grid; gap: 28px; }
+
+.update {
+  background: var(--sun-soft); border-left: 4px solid var(--sun);
+  border-radius: 6px; padding: 12px 16px; font-size: 15px;
+}
+.update b { font-weight: 700; }
+
+h2 {
+  font-family: var(--font-display); font-weight: 600; font-size: 26px; line-height: 1.2;
+  margin: 0; text-wrap: balance;
+}
+h3 { font-size: 17px; font-weight: 700; margin: 18px 0 6px; }
+.section-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; justify-content: space-between; }
+.section-head p { margin: 4px 0 0; color: var(--muted); }
+
+/* Tabelle */
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td a { color: var(--brand); font-weight: 600; text-decoration: none; }
+td a:hover { text-decoration: underline; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Strumenti */
+.tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.search {
+  flex: 1 1 240px; min-width: 0;
+  font: inherit; font-size: 16px; padding: 10px 14px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink);
+}
+button {
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink);
+}
+button:hover { border-color: var(--brand); color: var(--brand); }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+
+/* Tendine */
+.chapters { display: grid; gap: 10px; }
+details.ch {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+}
+details.ch > summary {
+  list-style: none; cursor: pointer; padding: 16px 18px;
+  display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+}
+details.ch > summary::-webkit-details-marker { display: none; }
+.sum-title { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.25; }
+.sum-sub { display: block; font-family: var(--font-body); font-size: 14px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.chev {
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--bg); color: var(--brand); font-weight: 700; transition: transform .2s ease;
+}
+details[open] > summary .chev { transform: rotate(90deg); }
+details.ch[open] { border-color: var(--brand); }
+.body { padding: 0 18px 20px; border-top: 1px solid var(--line); }
+.body > :first-child { margin-top: 16px; }
+.body ol, .body ul { padding-left: 22px; margin: 8px 0; }
+.body li { margin: 4px 0; }
+.body p { margin: 8px 0; }
+.note { font-size: 15px; color: var(--muted); }
+
+details.sub { margin-top: 16px; border: 1px dashed var(--line); border-radius: 8px; background: var(--bg); }
+details.sub > summary { cursor: pointer; padding: 12px 14px; font-weight: 700; }
+details.sub .inner { padding: 0 14px 14px; }
+.owner { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  background: var(--sun); color: #16163a; padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: 2px; }
+
+/* Prompt da copiare */
+.prompt { position: relative; margin: 10px 0; }
+.prompt pre {
+  background: var(--code-bg); border-radius: 8px; padding: 14px 16px; margin: 0;
+  white-space: pre-wrap; word-break: break-word; font-size: 14px; line-height: 1.55;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+.prompt button { margin-top: 8px; }
+
+/* Checklist */
+.check { list-style: none; padding-left: 0 !important; }
+.check label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.check input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--brand); flex: none; }
+
+.hidden-by-search { display: none; }
+.empty { color: var(--muted); }
+
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
+
+@media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .sum-title { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <span class="eyebrow">Segretariato Attività Ecumeniche</span>
+    <h1>Manuale grafica SAE</h1>
+    <p>Come si preparano post, brochure e reel del SAE su Canva, passo per passo. Apri solo la tendina che ti serve.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="update"><b>Ultimo aggiornamento: 26 ottobre 2026.</b> Prima versione online: tutti i capitoli, la tabella dei modelli con i link, il capitolo sui reel.</div>
+
+    <section aria-labelledby="modelli-t">
+      <div class="section-head">
+        <div>
+          <h2 id="modelli-t">Quale modello usare</h2>
+          <p>Tutti i modelli sono nella cartella <b>00 Modelli</b> dentro <b>SAE – Grafica</b> su Canva. Apri quello giusto e fai una copia: File → Crea una copia.</p>
+        </div>
+      </div>
+      <div class="table-scroll" style="margin-top:14px">
+        <table>
+          <thead><tr><th>Modello</th><th>Formato</th><th>Quando usarlo</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://www.canva.com/d/I6MC0JK3SGUnjfz" target="_blank" rel="noopener">Evento online con ospiti</a></td><td>Post quadrato, 2 slide</td><td>Incontro su Zoom: copertina con data, ora e link, poi i relatori</td></tr>
+            <tr><td><a href="https://www.canva.com/d/AJisGhYABsbPKrB" target="_blank" rel="noopener">Evento in presenza con ospiti</a></td><td>Post quadrato, 2 slide</td><td>Incontro dal vivo: copertina con luogo, poi slide "Interverranno"</td></tr>
+            <tr><td><a href="https://www.canva.com/d/gox1rurPmNYqpDw" target="_blank" rel="noopener">Locandina evento online</a></td><td>A4 verticale, 1 pagina</td><td>Locandina per mail e WhatsApp</td></tr>
+            <tr><td><a href="https://www.canva.com/d/_tQCjur5Ak4SA_Q" target="_blank" rel="noopener">Meditazioni base</a></td><td>Post quadrato, 7 slide</td><td>Riflessioni e tempi liturgici</td></tr>
+            <tr><td><a href="https://www.canva.com/d/FHZ5tXoMJYIdRl6" target="_blank" rel="noopener">Personaggi famosi</a></td><td>Post quadrato, 3 slide</td><td>Serie sui personaggi delle confessioni cristiane</td></tr>
+            <tr><td><a href="https://www.canva.com/d/ahYChNtLV7e7aSx" target="_blank" rel="noopener">Post ricordo personaggio</a></td><td>Post quadrato, 1 slide</td><td>Ricorrenze e ricordo di una persona</td></tr>
+            <tr><td><a href="https://www.canva.com/d/Cn4WQKUD-8CNmKb" target="_blank" rel="noopener">Nuove voci sessione estiva</a></td><td>Post quadrato, 5 slide</td><td>Relatori nuovi della sessione estiva</td></tr>
+            <tr><td><a href="https://www.canva.com/d/ZtJCNqysLoZ9zfT" target="_blank" rel="noopener">Post convegno primavera</a></td><td>Post quadrato, 3 slide</td><td>Annuncio del Convegno di primavera</td></tr>
+            <tr><td><a href="https://www.canva.com/d/cWnIZvoldHa1Fx1" target="_blank" rel="noopener">Programma evento giovani</a></td><td>Post quadrato, 4 slide</td><td>Programma del convegno giovani, un giorno per slide</td></tr>
+            <tr><td><a href="https://www.canva.com/d/jo1ZngdlFaJdYBY" target="_blank" rel="noopener">Reel</a></td><td class="num">1080 × 1920, 3 pagine</td><td>Interviste e dialoghi</td></tr>
+            <tr><td><a href="https://www.canva.com/d/JgQTvT3IxNY1KyF" target="_blank" rel="noopener">Brochure sessione luglio</a></td><td class="num">A4 3 ante, 299 × 212 mm</td><td>Sessione estiva, stampa Pixartprinting</td></tr>
+            <tr><td><a href="https://www.canva.com/d/dt7c7mrF2o7k62B" target="_blank" rel="noopener">Brochure convegno primavera</a></td><td class="num">A4 3 ante, 299 × 212 mm</td><td>Convegno di primavera, stampa Pixartprinting</td></tr>
+            <tr><td><a href="https://www.canva.com/d/xr-aY8DOHWdY50x" target="_blank" rel="noopener">Brochure evento giovani</a></td><td>3 ante, formato Canva</td><td>Convegno giovani, diffusione digitale</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Se un modello ha una pagina segnata "ESEMPIO", serve solo per vedere il lavoro finito: si lavora sulle pagine con i segnaposto.</p>
+    </section>
+
+    <section aria-labelledby="cap-t">
+      <div class="section-head">
+        <h2 id="cap-t">Capitoli</h2>
+      </div>
+      <div class="tools" style="margin-top:12px">
+        <label for="q" class="sr" style="position:absolute;left:-9999px">Cerca nel manuale</label>
+        <input id="q" class="search" type="search" placeholder="Cerca: es. trasparenza, PDF, sottotitoli…" autocomplete="off">
+        <button type="button" id="openAll">Apri tutto</button>
+        <button type="button" id="closeAll">Chiudi tutto</button>
+      </div>
+      <p class="empty" id="noResults" hidden>Nessun capitolo contiene questa parola.</p>
+
+      <div class="chapters" id="chapters" style="margin-top:14px">
+
+        <details class="ch" id="regole">
+          <summary><span class="sum-title">Le quattro regole<span class="sum-sub">Valgono per qualsiasi lavoro</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <ol>
+              <li><b>Si parte da un modello, mai da zero.</b> Apri il modello in "00 Modelli" e fai una copia. Non modificare mai l'originale.</li>
+              <li><b>Ogni file ha un nome preciso:</b> anno-mese_tipo_evento. Esempi: "2026-11_post_Camaldoli", "2027-03_brochure_convegno-primavera".</li>
+              <li><b>Colori, font e loghi si prendono dal Brand Kit.</b> Nel pannello laterale di Canva apri "Brand". Non inventare colori nuovi.</li>
+              <li><b>Tutto passa da Maria.</b> Solo Maria pubblica su Instagram e approva le brochure. Tu prepari i file e glieli mandi.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="ch" id="cartelle">
+          <summary><span class="sum-title">Dove si trovano le cose su Canva<span class="sum-sub">Le cartelle di SAE – Grafica</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Cartella</th><th>Cosa contiene</th><th>Cosa ci fai tu</th></tr></thead>
+                <tbody>
+                  <tr><td>00 Modelli</td><td>I modelli puliti</td><td>Ne fai una copia, non li modifichi</td></tr>
+                  <tr><td>01 Social</td><td>Post, caroselli, reel</td><td>Salvi qui i post nuovi</td></tr>
+                  <tr><td>02 Locandine e brochure</td><td>Brochure, locandine, banner</td><td>Salvi qui le brochure nuove</td></tr>
+                  <tr><td>03 Presentazioni e documenti</td><td>Presentazioni, documenti del gruppo teologico</td><td>Salvi qui le presentazioni</td></tr>
+                  <tr><td>99 Archivio e bozze</td><td>Prove e copie vecchie</td><td>Puoi guardarli per prendere idee</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Se un progetto è stato pubblicato sta in 01, 02 o 03. Se è una prova va in 99.</p>
+          </div>
+        </details>
+
+        <details class="ch" id="testi">
+          <summary><span class="sum-title">Gerarchia dei testi e caratteri<span class="sum-sub">Titolo, sottotitolo, nomi, qualifiche: serif e sans alternati</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <p>Chi guarda deve capire subito cosa leggere per primo. Si alternano due famiglie: <b>serif</b>, con le grazie (Playfair Display, Lora), e <b>sans</b>, senza grazie (Montserrat, Open Sans).</p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Livello</th><th>Testo</th><th>Carattere</th><th>Stile</th><th>Post</th><th>Brochure</th></tr></thead>
+                <tbody>
+                  <tr><td class="num">1</td><td>Titolo dell'evento</td><td>Serif</td><td>Grassetto</td><td class="num">80-90</td><td class="num">28-36 pt</td></tr>
+                  <tr><td class="num">2</td><td>Sottotitolo / tema</td><td>Sans</td><td>Normale</td><td class="num">45-55</td><td class="num">16-20 pt</td></tr>
+                  <tr><td class="num">3</td><td>Data, ora, luogo</td><td>Sans</td><td>Grassetto</td><td class="num">45-55</td><td class="num">14-16 pt</td></tr>
+                  <tr><td class="num">4</td><td>Nome del relatore</td><td>Sans</td><td>Grassetto, MAIUSCOLO</td><td class="num">30-34</td><td class="num">11-12 pt</td></tr>
+                  <tr><td class="num">5</td><td>Qualifica del relatore</td><td>Serif</td><td>Corsivo</td><td class="num">24-26</td><td class="num">9-10 pt</td></tr>
+                  <tr><td class="num">6</td><td>Testo corrente, programma</td><td>Sans</td><td>Normale</td><td class="num">26-30</td><td class="num">9-11 pt</td></tr>
+                  <tr><td class="num">7</td><td>@sae_aps, contatti</td><td>Sans</td><td>Normale</td><td class="num">18-20</td><td class="num">8-9 pt</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Regole</h3>
+            <ul>
+              <li>Al massimo due caratteri per progetto: un serif e un sans.</li>
+              <li>Due livelli vicini non hanno mai lo stesso carattere: titolo serif e sottotitolo sans; nome sans e qualifica serif.</li>
+              <li>Nome e qualifica sono sempre diversi per carattere, dimensione e stile.</li>
+              <li>Ogni livello è un po' più piccolo di quello sopra.</li>
+              <li>Il grassetto solo per titolo, data e nomi.</li>
+              <li>"Segretariato Attività Ecumeniche" non è mai più grande del titolo.</li>
+            </ul>
+            <p class="note">Coppie consigliate, tutte in Canva: Playfair Display + Montserrat · Lora + Open Sans · Libre Baskerville + Raleway · Cormorant Garamond + Lato.</p>
+          </div>
+        </details>
+
+        <details class="ch" id="trasparenze">
+          <summary><span class="sum-title">Forme e trasparenze<span class="sum-sub">Scurire o schiarire una foto per far leggere il testo</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <ol>
+              <li>Elementi → Forme → quadrato o rettangolo.</li>
+              <li>Allargala sulla zona da coprire: tutta la slide, una fascia o un riquadro dietro al testo.</li>
+              <li>Cambia il colore con il quadratino colorato nella barra in alto.</li>
+              <li>Regola la trasparenza con l'icona a scacchiera in alto a destra.</li>
+              <li>Metti la forma sotto il testo e sopra la foto: Posizione → Indietro.</li>
+              <li>Bloccala con il lucchetto.</li>
+            </ol>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Effetto voluto</th><th>Forma</th><th>Colore</th><th>Trasparenza</th></tr></thead>
+                <tbody>
+                  <tr><td>Scurire la foto per testo bianco</td><td>Rettangolo su tutta la slide</td><td>Nero o blu scuro</td><td class="num">30-50</td></tr>
+                  <tr><td>Schiarire la foto per testo scuro</td><td>Rettangolo su tutta la slide</td><td>Bianco</td><td class="num">40-60</td></tr>
+                  <tr><td>Scurire solo la zona del testo</td><td>Fascia o sfumatura</td><td>Nero</td><td class="num">40-60</td></tr>
+                  <tr><td>Riquadro per citazioni</td><td>Rettangolo arrotondato</td><td>Bianco o crema</td><td class="num">70-85</td></tr>
+                  <tr><td>Pillola dietro ai nomi</td><td>Rettangolo molto arrotondato</td><td>Blu SAE</td><td class="num">100</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note">In Canva 100 è pieno, 0 è invisibile. Non coprire mai il logo SAE e usa lo stesso effetto in tutte le slide di un carosello.</p>
+          </div>
+        </details>
+
+        <details class="ch" id="effetti">
+          <summary><span class="sum-title">Effetti e allineamenti<span class="sum-sub">Effetto Sfondo, allinea, Distribuisci in modo uniforme</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <p>Valgono per post e brochure: sono gli strumenti che rendono il lavoro ordinato.</p>
+            <h3>Effetti per i testi</h3>
+            <p>Seleziona il testo e clicca <b>Effetti</b> nella barra in alto.</p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Effetto</th><th>A cosa serve</th><th>Quando usarlo</th></tr></thead>
+                <tbody>
+                  <tr><td>Ombra</td><td>Stacca il testo dalla foto</td><td>Titoli bianchi su foto chiare</td></tr>
+                  <tr><td>Sollevato</td><td>Ombra morbida</td><td>Quando l'ombra è troppo marcata</td></tr>
+                  <tr><td>Sfondo</td><td>Riquadro colorato che si adatta al testo</td><td>Nomi, date, scritte brevi</td></tr>
+                  <tr><td>Contorno</td><td>Lettere vuote</td><td>Solo parole grandi decorative</td></tr>
+                  <tr><td>Curva</td><td>Testo ad arco</td><td>Raramente</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note">Evita Neon, Glitch ed Eco.</p>
+            <h3>Allineare il testo</h3>
+            <ul>
+              <li>Testo a sinistra dell'immagine: allinea a sinistra.</li>
+              <li>Testo a destra dell'immagine: allinea a destra.</li>
+              <li>Copertine e citazioni: centrato.</li>
+              <li>Programmi ed elenchi: sempre a sinistra.</li>
+            </ul>
+            <h3>Distribuisci in modo uniforme</h3>
+            <ol>
+              <li>Seleziona gli elementi tenendo premuto Maiusc.</li>
+              <li>Clicca <b>Posizione</b>.</li>
+              <li>Scegli l'allineamento.</li>
+              <li>Scegli <b>Distribuisci in modo uniforme</b>: lo spazio tra gli elementi diventa identico.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="ch" id="post">
+          <summary><span class="sum-title">Post Instagram<span class="sum-sub">Caroselli quadrati 1080 × 1080, esportati in PNG</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <p>In ogni slide ci sono sempre il <b>logo SAE</b> e <b>@sae_aps</b>.</p>
+            <ol>
+              <li>Scegli il modello nella tabella in alto e fai una copia.</li>
+              <li>Rinominala, per esempio "2026-11_post_incontro-avvento", e spostala in "01 Social / Post e caroselli".</li>
+              <li>Cambia titolo, sottotitolo, data, ora, luogo o riquadro Zoom.</li>
+              <li>Cambia l'immagine di sfondo (vedi "Immagini con l'IA").</li>
+              <li>Nella slide dei relatori trascina le foto sopra quelle vecchie e controlla nomi e qualifiche.</li>
+              <li>Controlla effetti, allineamenti e distanze.</li>
+              <li>Scarica: Condividi → Scarica → PNG → tutte le pagine.</li>
+              <li>Manda a Maria i PNG con la proposta di didascalia.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="ch" id="didascalie">
+          <summary><span class="sum-title">Didascalie<span class="sum-sub">Lo stile SAE e il prompt pronto per Claude</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <p>Stile SAE: prima riga diretta, dati pratici in evidenza, poche emoji sobrie, niente elenchi lunghi di nomi, testo breve, 3-6 hashtag con #SAE (per i giovani anche #SAEgiovani).</p>
+            <div class="prompt">
+<pre id="p-didascalia">Scrivi la didascalia Instagram per un post del SAE (Segretariato Attività Ecumeniche, @sae_aps).
+
+Tipo di post: [evento online / evento in presenza / presentazione relatori / meditazione]
+Titolo: [titolo dell'evento]
+Data e ora: [es. 13 maggio 2026, ore 20.45]
+Luogo o modalità: [es. su Zoom / Monastero di Camaldoli]
+Relatori: [nomi e qualifiche, se ci sono]
+Iscrizioni o link: [scadenza, link, oppure "link in bio"]
+
+Stile: tono caldo ma sobrio, prima riga diretta, dati pratici in evidenza, poche emoji (colomba, calendario, segnaposto), niente elenco lungo di nomi, al massimo 5-6 righe. Chiudi con 3-6 hashtag, tra cui #SAE.
+Dammi due versioni: una breve e una un po' più narrativa.</pre>
+              <button type="button" data-copy="p-didascalia">Copia il prompt</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="ch" id="immagini">
+          <summary><span class="sum-title">Immagini con l'IA<span class="sum-sub">Prompt, generatori, controlli</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <h3>1. Chiedi il prompt a Claude</h3>
+            <div class="prompt">
+<pre id="p-immagine">Mi serve un'immagine di sfondo per [un post Instagram quadrato / una brochure a 3 ante] del SAE (Segretariato Attività Ecumeniche).
+Tema dell'evento: [titolo e due righe sul contenuto]
+Atmosfera: [es. luminosa e serena / seria e riflessiva]
+Generatore che userò: [Gemini / ChatGPT / Ideogram / Canva]
+Scrivimi il prompt adatto a quel generatore. Lascia spazio libero in [alto / basso / a sinistra] per il titolo. Niente testo dentro l'immagine e niente persone riconoscibili.</pre>
+              <button type="button" data-copy="p-immagine">Copia il prompt</button>
+            </div>
+            <h3>2. Usa il generatore</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Generatore</th><th>Dove</th><th>Consiglio</th></tr></thead>
+                <tbody>
+                  <tr><td>Canva</td><td>Applicazioni → Dream Lab o Magic Media</td><td>Il più comodo: l'immagine va subito nel progetto</td></tr>
+                  <tr><td>Gemini</td><td>gemini.google.com</td><td>Bene per paesaggi e simboli</td></tr>
+                  <tr><td>ChatGPT</td><td>chatgpt.com</td><td>Puoi chiedere modifiche una alla volta</td></tr>
+                  <tr><td>Ideogram</td><td>ideogram.ai</td><td>Utile se serve una scritta nell'immagine</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>3. Controlla prima di usarla</h3>
+            <p>Niente simboli religiosi sbagliati, niente mani o volti deformati, formato giusto. Se hai dubbi, mandala a Maria.</p>
+          </div>
+        </details>
+
+        <details class="ch" id="brochure">
+          <summary><span class="sum-title">Brochure a 3 ante<span class="sum-sub">Misure Pixartprinting ed esportazione PDF</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Cosa</th><th>Misura</th></tr></thead>
+                <tbody>
+                  <tr><td>Formato finito, A4 orizzontale</td><td class="num">297 × 210 mm</td></tr>
+                  <tr><td>File in Canva, con abbondanza</td><td class="num"><b>299 × 212 mm</b></td></tr>
+                  <tr><td>Area sicura per testi e loghi</td><td>3 mm dal bordo, 4-5 mm dalle pieghe</td></tr>
+                  <tr><td>Anta che si ripiega all'interno</td><td class="num">circa 98 mm (le altre circa 100)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note">Il convegno giovani usa la brochure a 3 ante standard di Canva, perché si diffonde in digitale.</p>
+            <h3>Cosa c'è sempre</h3>
+            <p>Titolo e tema, programma per giorni con orari, relatori con qualifica, immagini, loghi dei patrocinatori, contatti e iscrizioni.</p>
+            <h3>Passaggi</h3>
+            <ol>
+              <li>Copia il modello della brochure da "00 Modelli".</li>
+              <li>Rinominala, per esempio "2027-07_brochure_sessione-estiva".</li>
+              <li>Aggiorna titolo, date, programma, relatori, contatti. Controlla ogni orario due volte.</li>
+              <li>Sostituisci immagini e loghi. Sfondi e foto arrivano fino al bordo esterno.</li>
+              <li>Programma allineato a sinistra, loghi con "Distribuisci in modo uniforme".</li>
+              <li>Esporta due versioni e mandale a Maria:
+                <ul>
+                  <li><b>Stampa:</b> PDF stampa, <b>senza</b> segni di taglio e abbondanza (l'abbondanza è già nel file).</li>
+                  <li><b>Leggera:</b> PDF standard ridotto, per mail e WhatsApp.</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="ch" id="reel">
+          <summary><span class="sum-title">Reel<span class="sum-sub">Da video orizzontale a reel verticale 1080 × 1920</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <p>In Canva <b>ogni pagina continua il video della pagina prima</b>: per cambiare inquadratura si passa alla pagina successiva.</p>
+            <h3>Montaggio</h3>
+            <ol>
+              <li>Scarica il video da Facebook in MP4 e caricalo su Canva: Caricamenti → Carica file.</li>
+              <li>Copia il <a href="https://www.canva.com/d/jo1ZngdlFaJdYBY" target="_blank" rel="noopener">modello di reel</a>: ha già il logo in sovrimpressione, due pagine con dissolvenza e una terza pagina per i sottotitoli, da non toccare.</li>
+              <li>Pagina 1: trascina il video, <b>inquadra la prima persona</b> (Ritaglia) e <b>taglia</b> nel punto esatto in cui deve cambiare l'inquadratura (Taglia). Annota il timestamp.</li>
+              <li>Pagina 2: il video riparte da lì. <b>Inquadra la seconda persona</b> e controlla che l'audio non si sovrapponga.</li>
+              <li>Dialoghi con più scambi: duplica la pagina 1 o 2 per ogni cambio. La pagina dei sottotitoli resta l'ultima.</li>
+              <li>Riguarda tutto il reel.</li>
+              <li>Manda a Maria il link del progetto: Condividi → Copia link.</li>
+            </ol>
+            <details class="sub" id="sottotitoli">
+              <summary>Sottotitoli <span class="owner">Maria</span></summary>
+              <div class="inner">
+                <p>Si fanno con <b>Caption Craft</b>, l'app che Maria ha già sul suo account, per ultimi.</p>
+                <ol>
+                  <li>Esporta per l'app in MP4 1080p.</li>
+                  <li>Stile: classico, bianco, 75, centrato, maiuscole e minuscole, in basso.</li>
+                  <li>Genera.</li>
+                  <li>Modifica: correggi nel riquadro sotto parole sbagliate, errori, ripetizioni, "eeh" e "aah".</li>
+                  <li>Aggiungi al progetto: il video sottotitolato va nell'ultima pagina.</li>
+                  <li>Scarica solo l'ultima pagina in MP4.</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="ch" id="checklist">
+          <summary><span class="sum-title">Checklist prima di consegnare<span class="sum-sub">Da spuntare ogni volta</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <ul class="check">
+              <li><label><input type="checkbox" id="c1"> Nome del file giusto e cartella giusta</label></li>
+              <li><label><input type="checkbox" id="c2"> Date, orari e giorni della settimana corretti</label></li>
+              <li><label><input type="checkbox" id="c3"> Nomi e qualifiche dei relatori scritti bene</label></li>
+              <li><label><input type="checkbox" id="c4"> Logo SAE e @sae_aps in ogni slide o pagina</label></li>
+              <li><label><input type="checkbox" id="c5"> Colori e font del Brand Kit</label></li>
+              <li><label><input type="checkbox" id="c6"> Tutti i testi riletti</label></li>
+              <li><label><input type="checkbox" id="c7"> Immagine IA senza errori</label></li>
+              <li><label><input type="checkbox" id="c8"> Formato giusto: PNG per i post, due PDF per le brochure, MP4 per i reel</label></li>
+              <li><label><input type="checkbox" id="c9"> Proposta di didascalia pronta (solo post)</label></li>
+            </ul>
+            <button type="button" id="resetCheck">Azzera la checklist</button>
+          </div>
+        </details>
+
+        <details class="ch" id="tutorial">
+          <summary><span class="sum-title">Video tutorial<span class="sum-sub">Brevi video, uno per argomento</span></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="body">
+            <ul>
+              <li>Partire da un modello: <i>in arrivo</i></li>
+              <li>Forme e trasparenze: <i>in arrivo</i></li>
+              <li>Effetti e allineamenti: <i>in arrivo</i></li>
+              <li>Inserire un'immagine creata con l'IA: <i>in arrivo</i></li>
+              <li>Esportare post e brochure: <i>in arrivo</i></li>
+              <li>Montaggio del reel: <i>in arrivo</i></li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <footer>Manuale interno del gruppo grafica SAE. Per dubbi o correzioni scrivi a Maria.</footer>
+  </div>
+</main>
+
+<script>
+(function () {
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('details.ch'));
+
+  // Apre la tendina indicata nel link (es. …#reel)
+  function openFromHash() {
+    var id = (location.hash || '').slice(1);
+    if (!/^[A-Za-z0-9._~-]+$/.test(id)) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var d = el.tagName === 'DETAILS' ? el : el.closest('details');
+    while (d) { d.open = true; d = d.parentElement ? d.parentElement.closest('details') : null; }
+    el.scrollIntoView({ block: 'start' });
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+
+  document.getElementById('openAll').addEventListener('click', function () {
+    chapters.forEach(function (d) { d.open = true; });
+  });
+  document.getElementById('closeAll').addEventListener('click', function () {
+    document.querySelectorAll('details').forEach(function (d) { d.open = false; });
+  });
+
+  // Ricerca: mostra solo i capitoli che contengono la parola e li apre
+  var q = document.getElementById('q');
+  var none = document.getElementById('noResults');
+  q.addEventListener('input', function () {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    chapters.forEach(function (d) {
+      var hit = !term || d.textContent.toLowerCase().indexOf(term) !== -1;
+      d.classList.toggle('hidden-by-search', !hit);
+      if (hit) shown++;
+      d.open = !!term && hit;
+    });
+    none.hidden = shown !== 0;
+  });
+
+  // Copia dei prompt
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = document.getElementById(btn.getAttribute('data-copy'));
+      var text = pre.textContent;
+      function selectIt() {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Testo selezionato: premi Ctrl+C';
+      }
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'Copiato';
+          setTimeout(function () { btn.textContent = 'Copia il prompt'; }, 2000);
+        }, selectIt);
+      } catch (e) { selectIt(); }
+    });
+  });
+
+  // Checklist ricordata solo su questo dispositivo
+  var boxes = document.querySelectorAll('.check input');
+  boxes.forEach(function (b) {
+    try { b.checked = localStorage.getItem('sae-' + b.id) === '1'; } catch (e) {}
+    b.addEventListener('change', function () {
+      try { localStorage.setItem('sae-' + b.id, b.checked ? '1' : '0'); } catch (e) {}
+    });
+  });
+  document.getElementById('resetCheck').addEventListener('click', function () {
+    boxes.forEach(function (b) {
+      b.checked = false;
+      try { localStorage.removeItem('sae-' + b.id); } catch (e) {}
+    });
+  });
+})();
+</script>
+</body>
+</html>
